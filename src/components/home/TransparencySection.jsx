@@ -38,10 +38,16 @@ function WalletCard({ title, address, icon: Icon, transactions, color, totalIn, 
               </button>
             </div>
           </div>
-          <Button size="sm" variant="outline" className="border-white/20 text-white hover:bg-white/10">
-            <ExternalLink className="w-4 h-4 mr-2" />
-            Explorer
-          </Button>
+          <a 
+            href={`https://plasmascan.to/address/${address}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button size="sm" variant="outline" className="border-white/20 text-white hover:bg-white/10">
+              <ExternalLink className="w-4 h-4 mr-2" />
+              Explorer
+            </Button>
+          </a>
         </div>
 
         {/* Totals */}
