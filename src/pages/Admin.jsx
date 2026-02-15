@@ -3,7 +3,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { base44 } from '@/api/base44Client';
 import { 
   Heart, CheckCircle, XCircle, Clock, DollarSign, 
-  ExternalLink, Eye, ChevronDown, Loader2, ArrowLeft
+  ExternalLink, Eye, ChevronDown, Loader2, ArrowLeft, Wallet
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -83,6 +83,12 @@ export default function Admin() {
             <h1 className="text-3xl font-bold text-white">Admin Dashboard</h1>
             <p className="text-white/50">Manage vet assistance applications</p>
           </div>
+          <Link to={createPageUrl('Payments')}>
+            <Button className="bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600">
+              <Wallet className="w-4 h-4 mr-2" />
+              View Payments
+            </Button>
+          </Link>
         </div>
 
         {/* Stats */}
