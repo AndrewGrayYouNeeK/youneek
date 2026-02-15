@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { base44 } from '@/api/base44Client';
 import { ArrowUpRight, ArrowDownLeft, ExternalLink, Wallet, Copy, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -116,10 +116,21 @@ function WalletCard({ title, address, icon: Icon, transactions, color, totalIn, 
 }
 
 export default function TransparencySection() {
+  const queryClient = useQueryClient();
+  
   const { data: transactions = [] } = useQuery({
     queryKey: ['wallet-transactions'],
     queryFn: () => base44.entities.WalletTransaction.list('-timestamp', 100),
   });
+
+  // Real-time updates
+  React.useEffect(() => {
+    const unsubscribe = base44.entities.WalletTransaction.subscribe((event) => {
+      queryClient.invalidateQueries(['wallet-transactions']);
+    });
+    
+    return unsubscribe;
+  }, [queryClient]);
 
   const calculateTotals = (txs) => {
     const totalIn = txs.filter(tx => tx.tx_type === 'incoming').reduce((sum, tx) => sum + (tx.amount || 0), 0);
