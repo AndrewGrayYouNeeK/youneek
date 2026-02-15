@@ -1,5 +1,5 @@
 import React from 'react';
-import { Heart, Twitter, MessageCircle, Globe } from 'lucide-react';
+import { Heart } from 'lucide-react';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -23,19 +23,6 @@ export default function Footer() {
             <a href="#impact" className="hover:text-white transition-colors">Impact</a>
             <a href="#apply" className="hover:text-white transition-colors">Apply</a>
             <a href="#how-to-buy" className="hover:text-white transition-colors">Buy</a>
-          </div>
-
-          {/* Socials */}
-          <div className="flex items-center gap-4">
-            <a href="#" className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/50 hover:text-white hover:bg-white/10 transition-all">
-              <Twitter className="w-5 h-5" />
-            </a>
-            <a href="#" className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/50 hover:text-white hover:bg-white/10 transition-all">
-              <MessageCircle className="w-5 h-5" />
-            </a>
-            <a href="#" className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/50 hover:text-white hover:bg-white/10 transition-all">
-              <Globe className="w-5 h-5" />
-            </a>
           </div>
         </div>
 

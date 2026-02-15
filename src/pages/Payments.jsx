@@ -62,13 +62,19 @@ export default function Payments() {
                   <div className="text-lg font-bold text-white">Plasma Network</div>
                 </div>
               </div>
-              <Button 
-                variant="outline" 
-                className="border-orange-500/30 text-white hover:bg-orange-500/10"
+              <a 
+                href={`https://plasmascan.to/address/${CHARITY_WALLET}`}
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <ExternalLink className="w-4 h-4 mr-2" />
-                View on Explorer
-              </Button>
+                <Button 
+                  variant="outline" 
+                  className="border-orange-500/30 text-white hover:bg-orange-500/10"
+                >
+                  <ExternalLink className="w-4 h-4 mr-2" />
+                  View on Explorer
+                </Button>
+              </a>
             </div>
 
             <div className="bg-black/30 rounded-xl p-4 flex items-center justify-between">
