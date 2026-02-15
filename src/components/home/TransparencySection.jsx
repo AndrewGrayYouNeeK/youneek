@@ -2,13 +2,12 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useQuery } from '@tanstack/react-query';
 import { base44 } from '@/api/base44Client';
-import { ArrowUpRight, ArrowDownLeft, ExternalLink, Wallet, Heart, Copy, Check } from 'lucide-react';
+import { ArrowUpRight, ArrowDownLeft, ExternalLink, Wallet, Copy, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { format } from 'date-fns';
 
-const FOUNDER_WALLET = '0x1234...5678';
-const CHARITY_WALLET = '0x8765...4321';
+const OWNER_WALLET = '0x1234...5678';
 
 function WalletCard({ title, address, icon: Icon, transactions, color, totalIn, totalOut }) {
   const [copied, setCopied] = React.useState(false);
@@ -113,11 +112,8 @@ function WalletCard({ title, address, icon: Icon, transactions, color, totalIn, 
 export default function TransparencySection() {
   const { data: transactions = [] } = useQuery({
     queryKey: ['wallet-transactions'],
-    queryFn: () => base44.entities.WalletTransaction.list('-timestamp', 50),
+    queryFn: () => base44.entities.WalletTransaction.list('-timestamp', 100),
   });
-
-  const founderTxs = transactions.filter(tx => tx.wallet_type === 'founder');
-  const charityTxs = transactions.filter(tx => tx.wallet_type === 'charity');
 
   const calculateTotals = (txs) => {
     const totalIn = txs.filter(tx => tx.tx_type === 'incoming').reduce((sum, tx) => sum + (tx.amount || 0), 0);
@@ -125,8 +121,7 @@ export default function TransparencySection() {
     return { totalIn, totalOut };
   };
 
-  const founderTotals = calculateTotals(founderTxs);
-  const charityTotals = calculateTotals(charityTxs);
+  const totals = calculateTotals(transactions);
 
   return (
     <section id="transparency" className="py-24 bg-gradient-to-b from-slate-950 to-slate-900 relative">
@@ -143,46 +138,29 @@ export default function TransparencySection() {
             🔴 Live Data
           </Badge>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Full <span className="text-orange-400">Transparency</span>
+            My <span className="text-orange-400">Wallet</span>
           </h2>
           <p className="text-xl text-white/60 max-w-2xl mx-auto">
-            Nothing to hide. Watch every token move in real-time. Both wallets, fully public.
+            Nothing to hide. Watch every token move in real-time. My wallet, fully public.
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-6">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-          >
-            <WalletCard
-              title="Founder Wallet"
-              address={FOUNDER_WALLET}
-              icon={Wallet}
-              transactions={founderTxs}
-              color="from-purple-500 to-blue-500"
-              totalIn={founderTotals.totalIn}
-              totalOut={founderTotals.totalOut}
-            />
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-          >
-            <WalletCard
-              title="Charity Treasury"
-              address={CHARITY_WALLET}
-              icon={Heart}
-              transactions={charityTxs}
-              color="from-orange-500 to-yellow-500"
-              totalIn={charityTotals.totalIn}
-              totalOut={charityTotals.totalOut}
-            />
-          </motion.div>
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-4xl mx-auto"
+        >
+          <WalletCard
+            title="Owner's Wallet"
+            address={OWNER_WALLET}
+            icon={Wallet}
+            transactions={transactions}
+            color="from-purple-500 to-blue-500"
+            totalIn={totals.totalIn}
+            totalOut={totals.totalOut}
+          />
+        </motion.div>
 
         <motion.p
           initial={{ opacity: 0 }}
