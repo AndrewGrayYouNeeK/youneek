@@ -116,21 +116,31 @@ function WalletCard({ title, address, icon: Icon, transactions, color, totalIn, 
 }
 
 export default function TransparencySection() {
-  const queryClient = useQueryClient();
-  
-  const { data: transactions = [] } = useQuery({
-    queryKey: ['wallet-transactions'],
-    queryFn: () => base44.entities.WalletTransaction.list('-timestamp', 100),
+  const { data: rawData, isLoading } = useQuery({
+    queryKey: ['plasma-transactions', OWNER_WALLET],
+    queryFn: async () => {
+      const response = await fetch(`https://api.plasmascan.to/api?module=account&action=txlist&address=${OWNER_WALLET}&startblock=0&endblock=99999999&sort=desc`);
+      const data = await response.json();
+      return data;
+    },
+    refetchInterval: 30000, // Refresh every 30 seconds for live updates
   });
 
-  // Real-time updates
-  React.useEffect(() => {
-    const unsubscribe = base44.entities.WalletTransaction.subscribe((event) => {
-      queryClient.invalidateQueries(['wallet-transactions']);
-    });
+  // Transform blockchain data to match our format
+  const transactions = React.useMemo(() => {
+    if (!rawData?.result || !Array.isArray(rawData.result)) return [];
     
-    return unsubscribe;
-  }, [queryClient]);
+    return rawData.result.map(tx => ({
+      id: tx.hash,
+      tx_hash: tx.hash,
+      tx_type: tx.to?.toLowerCase() === OWNER_WALLET.toLowerCase() ? 'incoming' : 'outgoing',
+      amount: parseFloat(tx.value) / 1e18, // Convert from Wei
+      from_address: tx.from,
+      to_address: tx.to,
+      timestamp: new Date(parseInt(tx.timeStamp) * 1000).toISOString(),
+      description: tx.to?.toLowerCase() === OWNER_WALLET.toLowerCase() ? 'Received' : 'Sent'
+    }));
+  }, [rawData]);
 
   const calculateTotals = (txs) => {
     const totalIn = txs.filter(tx => tx.tx_type === 'incoming').reduce((sum, tx) => sum + (tx.amount || 0), 0);
