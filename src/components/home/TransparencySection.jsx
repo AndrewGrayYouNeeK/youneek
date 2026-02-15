@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { format } from 'date-fns';
 
-const OWNER_WALLET = '0x2D8507dadac5216DedCcdB1B4716c1B7101D807E';
+const OWNER_WALLET = '0x1c08Ba1f00295afcBD1Ed33575a62ec0817f2219';
 
 function WalletCard({ title, address, icon: Icon, transactions, color, totalIn, totalOut }) {
   const [copied, setCopied] = React.useState(false);
