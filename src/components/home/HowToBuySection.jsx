@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Wallet, ArrowRightLeft, Coins, CheckCircle, ExternalLink, Copy, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-const CONTRACT_ADDRESS = '0xYOUNEEK...CONTRACT';
+const CONTRACT_ADDRESS = '0xdd518FE45F2E79d297dfDBAE6955ec92d79B8A1e';
 
 export default function HowToBuySection() {
   const [copied, setCopied] = React.useState(false);
