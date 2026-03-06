@@ -6,6 +6,7 @@ import TransparencySection from '@/components/home/TransparencySection';
 import ImpactSection from '@/components/home/ImpactSection';
 import ApplySection from '@/components/home/ApplySection';
 import HowToBuySection from '@/components/home/HowToBuySection';
+import DonationsSection from '@/components/home/DonationsSection';
 import Footer from '@/components/home/Footer';
 
 export default function Home() {
@@ -16,6 +17,7 @@ export default function Home() {
       <MissionSection />
       <TransparencySection />
       <ImpactSection />
+      <DonationsSection />
       <ApplySection />
       <HowToBuySection />
       <Footer />

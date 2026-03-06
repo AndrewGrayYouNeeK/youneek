@@ -50,12 +50,14 @@
 import Admin from './pages/Admin';
 import Home from './pages/Home';
 import Payments from './pages/Payments';
+import ThankYou from './pages/ThankYou';
 
 
 export const PAGES = {
     "Admin": Admin,
     "Home": Home,
     "Payments": Payments,
+    "ThankYou": ThankYou,
 }
 
 export const pagesConfig = {
