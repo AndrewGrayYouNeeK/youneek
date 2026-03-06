@@ -51,6 +51,7 @@ import Admin from './pages/Admin';
 import Home from './pages/Home';
 import Payments from './pages/Payments';
 import ThankYou from './pages/ThankYou';
+import Whitepaper from './pages/Whitepaper';
 
 
 export const PAGES = {
@@ -58,6 +59,7 @@ export const PAGES = {
     "Home": Home,
     "Payments": Payments,
     "ThankYou": ThankYou,
+    "Whitepaper": Whitepaper,
 }
 
 export const pagesConfig = {
