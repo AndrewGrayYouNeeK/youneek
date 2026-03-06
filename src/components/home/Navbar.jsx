@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Heart, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
+import { createPageUrl } from '@/utils';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -56,6 +58,12 @@ export default function Navbar() {
                 {link.label}
               </button>
             ))}
+            <Link
+              to={createPageUrl('Whitepaper')}
+              className="text-white/70 hover:text-white transition-colors text-sm font-medium"
+            >
+              Whitepaper
+            </Link>
           </div>
 
           {/* CTA */}
@@ -94,6 +102,13 @@ export default function Navbar() {
                   {link.label}
                 </button>
               ))}
+              <Link
+                to={createPageUrl('Whitepaper')}
+                className="text-white/70 hover:text-white transition-colors py-2 text-left"
+                onClick={() => setMobileOpen(false)}
+              >
+                Whitepaper
+              </Link>
               <Button 
                 onClick={() => scrollToSection('how-to-buy')}
                 className="mt-2 bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 text-white font-semibold"
