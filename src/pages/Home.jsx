@@ -4,6 +4,7 @@ import HeroSection from '@/components/home/HeroSection';
 import MissionSection from '@/components/home/MissionSection';
 import TransparencySection from '@/components/home/TransparencySection';
 import ImpactSection from '@/components/home/ImpactSection';
+import RoadmapSection from '@/components/home/RoadmapSection';
 import ApplySection from '@/components/home/ApplySection';
 import HowToBuySection from '@/components/home/HowToBuySection';
 import DonationsSection from '@/components/home/DonationsSection';
@@ -17,6 +18,7 @@ export default function Home() {
       <MissionSection />
       <TransparencySection />
       <ImpactSection />
+      <RoadmapSection />
       <DonationsSection />
       <ApplySection />
       <HowToBuySection />
