@@ -211,6 +211,7 @@ export default function ApplySection() {
                       onChange={(e) => setPetPhoto(e.target.files[0])}
                       className="hidden"
                       id="pet-photo"
+                      disabled={!CLOUDINARY_CLOUD_NAME || !CLOUDINARY_UPLOAD_PRESET}
                     />
                     <label 
                       htmlFor="pet-photo"
@@ -332,6 +333,7 @@ export default function ApplySection() {
                       onChange={(e) => setDocumentation(e.target.files[0])}
                       className="hidden"
                       id="documentation"
+                      disabled={!CLOUDINARY_CLOUD_NAME || !CLOUDINARY_UPLOAD_PRESET}
                     />
                     <label 
                       htmlFor="documentation"
