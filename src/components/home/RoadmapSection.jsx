@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Badge } from '@/components/ui/badge';
-import { Flag, Rocket, Calendar, Clock, CheckCircle2, Target } from 'lucide-react';
+import { Flag, Rocket, Calendar, Clock, CheckCircle2, Target, ShieldCheck } from 'lucide-react';
 
 function StatusBadge({ status }) {
   const map = {
