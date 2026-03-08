@@ -9,6 +9,12 @@ import { format } from 'date-fns';
 
 const OWNER_WALLET = '0x1c08Ba1f00295afcBD1Ed33575a62ec0817f2219';
 
+// Paste your two additional wallets here
+const EXTRA_WALLETS = [
+  { title: 'Custom Wallet 1', address: '0x...' },
+  { title: 'Custom Wallet 2', address: '0x...' },
+];
+
 function WalletCard({ title, address, icon: Icon, transactions, color, totalIn, totalOut }) {
   const [copied, setCopied] = React.useState(false);
 
@@ -115,6 +121,54 @@ function WalletCard({ title, address, icon: Icon, transactions, color, totalIn, 
   );
 }
 
+function WalletData({ title, address, color }) {
+  const enabled = Boolean(address && address.length > 10 && address !== '0x...');
+  const { data: rawData } = useQuery({
+    queryKey: ['plasma-transactions', address],
+    queryFn: async () => {
+      const response = await fetch(`https://api.plasmascan.to/api?module=account&action=txlist&address=${address}&startblock=0&endblock=99999999&sort=desc`);
+      const data = await response.json();
+      return data;
+    },
+    enabled,
+    refetchInterval: 30000,
+  });
+
+  if (!enabled) return null;
+
+  const transactions = React.useMemo(() => {
+    if (!rawData?.result || !Array.isArray(rawData.result)) return [];
+    return rawData.result.map(tx => ({
+      id: tx.hash,
+      tx_hash: tx.hash,
+      tx_type: tx.to?.toLowerCase() === address.toLowerCase() ? 'incoming' : 'outgoing',
+      amount: parseFloat(tx.value) / 1e18,
+      from_address: tx.from,
+      to_address: tx.to,
+      timestamp: new Date(parseInt(tx.timeStamp) * 1000).toISOString(),
+      description: tx.to?.toLowerCase() === address.toLowerCase() ? 'Received' : 'Sent'
+    }));
+  }, [rawData, address]);
+
+  const totals = React.useMemo(() => {
+    const totalIn = transactions.filter(tx => tx.tx_type === 'incoming').reduce((sum, tx) => sum + (tx.amount || 0), 0);
+    const totalOut = transactions.filter(tx => tx.tx_type === 'outgoing').reduce((sum, tx) => sum + (tx.amount || 0), 0);
+    return { totalIn, totalOut };
+  }, [transactions]);
+
+  return (
+    <WalletCard
+      title={title}
+      address={address}
+      icon={Wallet}
+      transactions={transactions}
+      color={color}
+      totalIn={totals.totalIn}
+      totalOut={totals.totalOut}
+    />
+  );
+}
+
 export default function TransparencySection() {
   const { data: rawData, isLoading } = useQuery({
     queryKey: ['plasma-transactions', OWNER_WALLET],
@@ -188,6 +242,20 @@ export default function TransparencySection() {
             totalOut={totals.totalOut}
           />
         </motion.div>
+
+        {/* Additional Wallets */}
+        <div className="mt-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {EXTRA_WALLETS.map((w, idx) => (
+              <WalletData
+                key={w.title + idx}
+                title={w.title}
+                address={w.address}
+                color={idx === 0 ? 'from-fuchsia-500 to-rose-500' : 'from-emerald-500 to-teal-500'}
+              />
+            ))}
+          </div>
+        </div>
 
         <motion.p
           initial={{ opacity: 0 }}
