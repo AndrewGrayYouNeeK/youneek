@@ -34,13 +34,13 @@ export default function ApplySection() {
       let documentation_url = null;
 
       if (petPhoto) {
-        const result = await base44.integrations.Core.UploadFile({ file: petPhoto });
-        pet_photo_url = result.file_url;
+        // Disabled to prevent credit usage; will switch to Cloudinary backend.
+        console.warn('Pet photo upload disabled pending Cloudinary setup.');
       }
 
       if (documentation) {
-        const result = await base44.integrations.Core.UploadFile({ file: documentation });
-        documentation_url = result.file_url;
+        // Disabled to prevent credit usage; will switch to Cloudinary backend.
+        console.warn('Documentation upload disabled pending Cloudinary setup.');
       }
 
       return base44.entities.VetAssistanceApplication.create({
@@ -183,6 +183,7 @@ export default function ApplySection() {
                       onChange={(e) => setPetPhoto(e.target.files[0])}
                       className="hidden"
                       id="pet-photo"
+                      disabled
                     />
                     <label 
                       htmlFor="pet-photo"
@@ -304,6 +305,7 @@ export default function ApplySection() {
                       onChange={(e) => setDocumentation(e.target.files[0])}
                       className="hidden"
                       id="documentation"
+                      disabled
                     />
                     <label 
                       htmlFor="documentation"
