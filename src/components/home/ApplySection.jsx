@@ -10,6 +10,28 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 
+// Optional Cloudinary unsigned upload (no secrets needed here). Fill these to enable uploads.
+const CLOUDINARY_CLOUD_NAME = '';
+const CLOUDINARY_UPLOAD_PRESET = '';
+
+async function uploadToCloudinary(file) {
+  if (!file) return null;
+  if (!CLOUDINARY_CLOUD_NAME || !CLOUDINARY_UPLOAD_PRESET) return null;
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+  const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/auto/upload`, {
+    method: 'POST',
+    body: formData,
+  });
+  if (!res.ok) {
+    console.warn('Cloudinary upload failed', await res.text());
+    return null;
+  }
+  const data = await res.json();
+  return data.secure_url || data.url || null;
+}
+
 export default function ApplySection() {
   const [formData, setFormData] = useState({
     pet_name: '',
@@ -34,13 +56,11 @@ export default function ApplySection() {
       let documentation_url = null;
 
       if (petPhoto) {
-        // Disabled to prevent credit usage; will switch to Cloudinary backend.
-        console.warn('Pet photo upload disabled pending Cloudinary setup.');
+        pet_photo_url = await uploadToCloudinary(petPhoto);
       }
 
       if (documentation) {
-        // Disabled to prevent credit usage; will switch to Cloudinary backend.
-        console.warn('Documentation upload disabled pending Cloudinary setup.');
+        documentation_url = await uploadToCloudinary(documentation);
       }
 
       return base44.entities.VetAssistanceApplication.create({
@@ -138,7 +158,15 @@ export default function ApplySection() {
             </AlertDescription>
           </Alert>
 
-          <form onSubmit={handleSubmit} className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-8">
+          {(!CLOUDINARY_CLOUD_NAME || !CLOUDINARY_UPLOAD_PRESET) && (
+            <Alert className="bg-slate-500/10 border-slate-500/30 mb-6">
+              <AlertDescription className="text-white/80">
+                File uploads are disabled until Cloudinary is configured. You can still submit without attachments.
+              </AlertDescription>
+            </Alert>
+          )}
+
+           <form onSubmit={handleSubmit} className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-8">
             <div className="grid md:grid-cols-2 gap-6">
               {/* Pet Information */}
               <div className="space-y-4">
@@ -183,7 +211,6 @@ export default function ApplySection() {
                       onChange={(e) => setPetPhoto(e.target.files[0])}
                       className="hidden"
                       id="pet-photo"
-                      disabled
                     />
                     <label 
                       htmlFor="pet-photo"
@@ -305,7 +332,6 @@ export default function ApplySection() {
                       onChange={(e) => setDocumentation(e.target.files[0])}
                       className="hidden"
                       id="documentation"
-                      disabled
                     />
                     <label 
                       htmlFor="documentation"
