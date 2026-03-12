@@ -20,6 +20,7 @@ export default function Home() {
       <TransparencySection />
       <ImpactSection />
       <RoadmapSection />
+      <StakingSection />
       <DonationsSection />
       <ApplySection />
       <HowToBuySection />
