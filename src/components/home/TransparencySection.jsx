@@ -11,7 +11,7 @@ const OWNER_WALLET = '0x1c08Ba1f00295afcBD1Ed33575a62ec0817f2219';
 
 // Paste your two additional wallets here
 const EXTRA_WALLETS = [
-  { title: 'Custom Wallet 1', address: '0x...' },
+  { title: 'Donation', address: '0x17576606A5E6Dc81DC47707684e41063a448b9Fa' },
   { title: 'Custom Wallet 2', address: '0x...' },
 ];
 
