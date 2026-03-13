@@ -21,6 +21,7 @@ export default function Home() {
       <TransparencySection />
       <ImpactSection />
       <RoadmapSection />
+      <SwapWidget />
       <StakingSection />
       <DonationsSection />
       <ApplySection />
