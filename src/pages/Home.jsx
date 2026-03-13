@@ -9,6 +9,7 @@ import ApplySection from '@/components/home/ApplySection';
 import HowToBuySection from '@/components/home/HowToBuySection';
 import DonationsSection from '@/components/home/DonationsSection';
 import StakingSection from '@/components/staking/StakingSection';
+import SwapWidget from '@/components/swap/SwapWidget';
 import Footer from '@/components/home/Footer';
 
 export default function Home() {
