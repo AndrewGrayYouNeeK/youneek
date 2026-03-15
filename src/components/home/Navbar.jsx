@@ -67,7 +67,14 @@ export default function Navbar() {
           </div>
 
           {/* CTA */}
-          <div className="hidden md:block">
+          <div className="hidden md:flex items-center gap-3">
+            <Button 
+              variant="destructive"
+              onClick={() => scrollToSection('apply')}
+              className="font-semibold"
+            >
+              Emergency Application
+            </Button>
             <Button 
               onClick={() => scrollToSection('how-to-buy')}
               className="bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 text-white font-semibold"
@@ -109,6 +116,13 @@ export default function Navbar() {
               >
                 Whitepaper
               </Link>
+              <Button 
+                onClick={() => scrollToSection('apply')}
+                variant="destructive"
+                className="mt-2"
+              >
+                Emergency Application
+              </Button>
               <Button 
                 onClick={() => scrollToSection('how-to-buy')}
                 className="mt-2 bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 text-white font-semibold"
