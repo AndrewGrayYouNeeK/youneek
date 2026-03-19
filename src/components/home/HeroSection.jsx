@@ -62,8 +62,7 @@ export default function HeroSection() {
             </Button>
             <Button 
               size="lg" 
-              variant="outline" 
-              className="border-white/20 text-white hover:bg-white/10 px-8 py-6 text-lg rounded-xl backdrop-blur-sm"
+              className="bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 text-white font-semibold px-8 py-6 text-lg rounded-xl shadow-lg shadow-orange-500/25"
               onClick={() => scrollToSection('transparency')}
             >
               <Shield className="w-5 h-5 mr-2" />
@@ -76,7 +75,7 @@ export default function HeroSection() {
             {[
               { label: 'Total Supply', value: '100B', suffix: 'tokens' },
               { label: 'Transaction Tax', value: '2%', suffix: 'to charity' },
-              { label: 'Animals Helped', value: '127', suffix: 'and counting' },
+              { label: 'Animals Helped', value: '2', suffix: 'and counting' },
               { label: 'Blockchain', value: 'Plasma', suffix: 'mainnet' },
             ].map((stat, i) => (
               <motion.div

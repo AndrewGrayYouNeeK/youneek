@@ -110,7 +110,7 @@ export default function ImpactSection() {
           {/* Stats */}
           <div className="inline-flex items-center gap-8 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl px-8 py-4">
             <div className="text-center">
-              <div className="text-3xl font-bold text-orange-400">{applications.length}</div>
+              <div className="text-3xl font-bold text-orange-400">2</div>
               <div className="text-sm text-white/50">Animals Helped</div>
             </div>
             <div className="w-px h-12 bg-white/10" />
