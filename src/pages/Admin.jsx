@@ -26,6 +26,7 @@ import {
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
+import GitHubStatsCard from '@/components/admin/GitHubStatsCard';
 
 const statusColors = {
   pending: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
@@ -138,6 +139,8 @@ export default function Admin() {
             </CardContent>
           </Card>
         </div>
+
+        <GitHubStatsCard />
 
         {/* Filter */}
         <div className="flex items-center gap-4 mb-6">
