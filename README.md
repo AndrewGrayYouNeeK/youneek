@@ -1,32 +1,22 @@
-# YouNeeK
+# YouNeeK.xyz
 
-The official landing page and web presence for the YouNeeK project — a crypto token built around real-world impact, transparency, and community.
+The official hub landing page for all YouNeeK apps and projects — built by Andrew Gray.
 
-## About
+## What's Here
 
-YouNeeK is more than a token. It's a mission-driven project combining decentralized finance with charitable impact. This site covers the full story — the mission, roadmap, how to buy, staking, donations, and a live swap widget.
+A showcase of every YouNeeK app, linking out to each one directly:
 
-## Sections
+- **YouNeeK Pro Radar** — Live NEXRAD storm tracking & severe weather alerts
+- **YouNeeK Care** — Mission-driven crypto token, 2% to animal emergency care
+- **YouNeeK Time** — Minimal dark-themed world clock with widget mode
+- **YouNeeK Satellite Tracker** — Real-time satellite orbital tracking
+- **3i Atlas — The Game** — Stealth comet infiltration game across the solar system
+- **MaskIcon** — Disguise your apps with custom decoy icons (coming soon)
 
-- **Hero** — Project introduction and call to action
-- **Mission** — What YouNeeK stands for
-- **Transparency** — On-chain accountability and fund tracking
-- **Impact** — Real-world causes the project supports
-- **Roadmap** — Development milestones and future plans
-- **Swap Widget** — Live token swap interface
-- **Staking** — Earn rewards by holding YouNeeK
-- **Donations** — Direct charitable giving through the platform
-- **How to Buy** — Step-by-step guide for new holders
+## Stack
 
-## Running Locally
+React · Vite · Tailwind · Framer Motion · Base44
 
-```bash
-git clone https://github.com/AndrewGrayYouNeeK/youneek.git
-cd youneek
-npm install
-npm run dev
-```
+## Deploy
 
-## Built By
-
-Andrew Gray — YouNeeK
+Auto-deploys to [youneek.xyz](https://youneek.xyz) via Netlify on push to `main`.
