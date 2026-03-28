@@ -98,7 +98,7 @@
     "typescript": "^5.8.2",
     "vite": "^6.1.0"
   },
-  "description": "YouNeeK \u2014 crypto with a heart. 2% of every transaction funds emergency vet care for animals.",
+  "description": "YouNeeK — crypto with a heart. 2% of every transaction funds emergency vet care for animals.",
   "author": "Andrew Gray <andrew@youneek.com>",
   "license": "MIT",
   "homepage": "https://youneek.xyz",
