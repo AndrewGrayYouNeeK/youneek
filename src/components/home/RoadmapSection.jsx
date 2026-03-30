@@ -145,10 +145,10 @@ export default function RoadmapSection() {
     // Current
     {
       phase: 'current',
-      title: 'Launch Whitepaper + Payments',
+      title: 'Launch Whitepaper + Base44 Payments',
       period: 'Q1 2026',
       status: 'in_progress',
-      summary: 'Whitepaper live with PDF download; card donations enabled.',
+      summary: 'Whitepaper live with PDF download; card donations via Base44 Payments.',
       update: 'Tuning copy; polishing donation UX and receipts.',
       next: ['Finalize tokenomics numbers', 'Publish security proofs'],
       icon: Rocket,

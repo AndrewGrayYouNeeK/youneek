@@ -152,7 +152,7 @@ export default function Whitepaper() {
               <li className="flex items-start gap-2"><CheckCircle2 className="h-4 w-4 mt-0.5 text-emerald-300" /> Live wallet transparency with on-chain explorer links</li>
               <li className="flex items-start gap-2"><CheckCircle2 className="h-4 w-4 mt-0.5 text-emerald-300" /> Community governance over case prioritization</li>
               <li className="flex items-start gap-2"><CheckCircle2 className="h-4 w-4 mt-0.5 text-emerald-300" /> Success stories published after funded treatments</li>
-              <li className="flex items-start gap-2"><CheckCircle2 className="h-4 w-4 mt-0.5 text-emerald-300" /> Simple donations flow: crypto and card payments (USD)</li>
+              <li className="flex items-start gap-2"><CheckCircle2 className="h-4 w-4 mt-0.5 text-emerald-300" /> Simple donations flow: crypto and Base44 Payments (USD)</li>
             </ul>
           </Section>
 

@@ -1,22 +1,39 @@
-# YouNeeK.xyz
+**Welcome to your Base44 project** 
 
-The official hub landing page for all YouNeeK apps and projects — built by Andrew Gray.
+**About**
 
-## What's Here
+View and Edit  your app on [Base44.com](http://Base44.com) 
 
-A showcase of every YouNeeK app, linking out to each one directly:
+This project contains everything you need to run your app locally.
 
-- **YouNeeK Pro Radar** — Live NEXRAD storm tracking & severe weather alerts
-- **YouNeeK Care** — Mission-driven crypto token, 2% to animal emergency care
-- **YouNeeK Time** — Minimal dark-themed world clock with widget mode
-- **YouNeeK Satellite Tracker** — Real-time satellite orbital tracking
-- **3i Atlas — The Game** — Stealth comet infiltration game across the solar system
-- **MaskIcon** — Disguise your apps with custom decoy icons (coming soon)
+**Edit the code in your local development environment**
 
-## Stack
+Any change pushed to the repo will also be reflected in the Base44 Builder.
 
-React · Vite · Tailwind · Framer Motion · Base44
+**Prerequisites:** 
 
-## Deploy
+1. Clone the repository using the project's Git URL 
+2. Navigate to the project directory
+3. Install dependencies: `npm install`
+4. Create an `.env.local` file and set the right environment variables
 
-Auto-deploys to [youneek.xyz](https://youneek.xyz) via Netlify on push to `main`.
+```
+VITE_BASE44_APP_ID=your_app_id
+VITE_BASE44_APP_BASE_URL=your_backend_url
+
+e.g.
+VITE_BASE44_APP_ID=cbef744a8545c389ef439ea6
+VITE_BASE44_APP_BASE_URL=https://my-to-do-list-81bfaad7.base44.app
+```
+
+Run the app: `npm run dev`
+
+**Publish your changes**
+
+Open [Base44.com](http://Base44.com) and click on Publish.
+
+**Docs & Support**
+
+Documentation: [https://docs.base44.com/Integrations/Using-GitHub](https://docs.base44.com/Integrations/Using-GitHub)
+
+Support: [https://app.base44.com/support](https://app.base44.com/support)
