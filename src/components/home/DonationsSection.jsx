@@ -196,7 +196,7 @@ export default function DonationsSection() {
               </div>
               {error && <div className="text-amber-300 text-sm">{error}</div>}
               <div className="text-xs text-white/50">
-                Powered by Base44 Payments • Secure checkout • No account required
+                Secure checkout • No account required
               </div>
             </CardContent>
           </Card>
