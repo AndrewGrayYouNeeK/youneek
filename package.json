@@ -98,7 +98,7 @@
     "typescript": "^5.8.2",
     "vite": "^6.1.0"
   },
-  "description": "YouNeeK crypto project \u2014 mission-driven token with real-world impact",
+  "description": "YouNeeK crypto project — mission-driven token with real-world impact",
   "author": "Andrew Gray <andrew@youneek.com>",
   "license": "MIT",
   "homepage": "https://github.com/AndrewGrayYouNeeK/youneek",
