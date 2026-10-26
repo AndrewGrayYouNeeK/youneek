@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { base44 } from '@/api/base44Client';
+import { useQuery } from '@tanstack/react-query';
 import { ArrowUpRight, ArrowDownLeft, ExternalLink, Wallet, Copy, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -134,10 +133,8 @@ function WalletData({ title, address, color }) {
     refetchInterval: 30000,
   });
 
-  if (!enabled) return null;
-
   const transactions = React.useMemo(() => {
-    if (!rawData?.result || !Array.isArray(rawData.result)) return [];
+    if (!enabled || !rawData?.result || !Array.isArray(rawData.result)) return [];
     return rawData.result.map(tx => ({
       id: tx.hash,
       tx_hash: tx.hash,
@@ -148,13 +145,15 @@ function WalletData({ title, address, color }) {
       timestamp: new Date(parseInt(tx.timeStamp) * 1000).toISOString(),
       description: tx.to?.toLowerCase() === address.toLowerCase() ? 'Received' : 'Sent'
     }));
-  }, [rawData, address]);
+  }, [enabled, rawData, address]);
 
   const totals = React.useMemo(() => {
     const totalIn = transactions.filter(tx => tx.tx_type === 'incoming').reduce((sum, tx) => sum + (tx.amount || 0), 0);
     const totalOut = transactions.filter(tx => tx.tx_type === 'outgoing').reduce((sum, tx) => sum + (tx.amount || 0), 0);
     return { totalIn, totalOut };
   }, [transactions]);
+
+  if (!enabled) return null;
 
   return (
     <WalletCard

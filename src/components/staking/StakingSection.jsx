@@ -1,10 +1,9 @@
 import React from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { base44 } from '@/api/base44Client';
+import { stakingPositions } from '@/lib/localStore';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { ChevronRight, Coins, Award, Wallet } from 'lucide-react';
 
@@ -13,7 +12,7 @@ const TARGET_TOTAL_STAKE = 1_000_000; // display goal for progress bar
 function useTotals() {
   const { data: positions = [] } = useQuery({
     queryKey: ['staking-positions'],
-    queryFn: async () => base44.entities.StakingPosition.list('-created_date', 200),
+    queryFn: async () => stakingPositions.list('-created_date', 200),
     initialData: [],
   });
 
@@ -41,7 +40,7 @@ export default function StakingSection() {
   const [amount, setAmount] = React.useState('');
 
   const createMutation = useMutation({
-    mutationFn: (data) => base44.entities.StakingPosition.create(data),
+    mutationFn: (data) => stakingPositions.create(data),
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ['staking-positions'] });
       setAmount('');
@@ -58,7 +57,7 @@ export default function StakingSection() {
       const perSecond = yearly / (365 * 24 * 3600);
       const earned = perSecond * seconds; // simplistic
 
-      return base44.entities.StakingPosition.update(position.id, {
+      return stakingPositions.update(position.id, {
         claimed_rewards_total: (position.claimed_rewards_total || 0) + earned,
         last_claimed_at: new Date().toISOString(),
       });

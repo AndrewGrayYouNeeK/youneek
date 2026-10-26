@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { base44 } from '@/api/base44Client';
+import { fetchGithubCommitStats } from '@/lib/githubStats';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -17,8 +17,7 @@ export default function GitHubStatsCard() {
     enabled: Boolean(activeRepo?.owner && activeRepo?.repo),
     refetchInterval: 300000,
     queryFn: async () => {
-      const response = await base44.functions.invoke('githubCommitStats', activeRepo);
-      return response.data;
+      return fetchGithubCommitStats(activeRepo);
     },
   });
 

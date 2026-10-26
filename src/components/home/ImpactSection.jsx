@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useQuery } from '@tanstack/react-query';
-import { base44 } from '@/api/base44Client';
-import { Heart, DollarSign, ExternalLink, ChevronRight } from 'lucide-react';
+import { vetApplications } from '@/lib/localStore';
+import { Heart, ExternalLink, ChevronRight } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { format } from 'date-fns';
@@ -82,7 +82,7 @@ function ImpactCard({ application }) {
 export default function ImpactSection() {
   const { data: applications = [] } = useQuery({
     queryKey: ['funded-applications'],
-    queryFn: () => base44.entities.VetAssistanceApplication.filter({ status: 'funded', is_public: true }, '-updated_date', 20),
+    queryFn: () => vetApplications.filter({ status: 'funded', is_public: true }, '-updated_date', 20),
   });
 
   const totalFunded = applications.reduce((sum, app) => sum + (app.funded_amount || 0), 0);

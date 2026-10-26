@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Copy, Check, QrCode, Wallet, CreditCard, Info, ExternalLink } from 'lucide-react';
-import { base44 } from '@/api/base44Client';
+import { createCardCheckout } from '@/lib/checkout';
 import QRCode from 'qrcode';
 
 function useQrData(urlOrText) {
@@ -109,12 +109,11 @@ export default function DonationsSection() {
     if (isNaN(val) || val <= 0) { setError('Enter a valid amount'); return; }
     setLoading(true);
     try {
-      const res = await base44.functions.invoke('create-checkout', { amount: val });
-      const url = res?.data?.redirectUrl || res?.data?.checkoutSession?.redirectUrl;
-      if (url) {
-        window.location.href = url;
+      const res = await createCardCheckout({ amount: val });
+      if (res?.redirectUrl) {
+        window.location.href = res.redirectUrl;
       } else {
-        setError('Could not start checkout. Please try again.');
+        setError(res?.error || 'Could not start checkout. Please try again.');
       }
     } catch (e) {
       console.error(e);
@@ -196,7 +195,7 @@ export default function DonationsSection() {
               </div>
               {error && <div className="text-amber-300 text-sm">{error}</div>}
               <div className="text-xs text-white/50">
-                Secure checkout • No account required
+                Card payments are not connected in this build. Crypto donations above still work.
               </div>
             </CardContent>
           </Card>
