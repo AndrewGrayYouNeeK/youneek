@@ -4,7 +4,7 @@ YouNeeK is a crypto-powered donation and emergency assistance platform focused o
 
 ## What the app does
 
-- Accepts donations through crypto and Base44 Payments
+- Accepts crypto donations and explains that card checkout is not connected in this standalone build
 - Lets people apply for emergency veterinary assistance
 - Shows public impact and transparency across funded cases
 - Includes admin tools for reviewing applications and tracking platform activity
@@ -17,7 +17,7 @@ YouNeeK is a crypto-powered donation and emergency assistance platform focused o
 - **Admin** — dashboard for reviewing and managing applications
 - **Payments** — treasury and payment tracking
 - **Whitepaper** — project overview and token information
-- **Thank You** — confirmation page after payment or donation flow
+- **Thank You** — confirmation page after a completed donation flow
 
 ## Tech stack
 
@@ -25,8 +25,8 @@ Built with:
 
 - React
 - Tailwind CSS
-- TypeScript/JavaScript frontend on Base44
-- Base44 backend functions, entities, auth, and integrations
+- Vite
+- Browser `localStorage` for applications, staking positions, and charity payment records
 
 ## Local development
 
@@ -35,21 +35,13 @@ Built with:
    ```bash
    npm install
    ```
-3. Create an `.env.local` file with your app values:
-   ```env
-   VITE_BASE44_APP_ID=your_app_id
-   VITE_BASE44_APP_BASE_URL=your_app_url
-   ```
-4. Start the app:
+3. Start the app:
    ```bash
    npm run dev
    ```
 
-## Publishing
-
-Publish updates from the Base44 builder after verifying your changes.
+Applications, staking positions, and charity wallet records are stored in this browser only. Wallet activity on the home page is read from the public Plasma explorer. GitHub commit stats on the admin page are read from the public GitHub API.
 
 ## Notes
 
-This repository is for the YouNeeK app source code.
-If the README was previously showing the default Base44 starter text, that has now been replaced with a project-specific summary.
+This repository is the standalone YouNeeK app source code.

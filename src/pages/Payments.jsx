@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { base44 } from '@/api/base44Client';
+import { walletTransactions } from '@/lib/localStore';
 import { 
   Wallet, ArrowDownLeft, ArrowUpRight, Copy, Check, 
   ExternalLink, TrendingUp, DollarSign, ArrowLeft
@@ -20,7 +20,7 @@ export default function Payments() {
 
   const { data: transactions = [] } = useQuery({
     queryKey: ['charity-transactions'],
-    queryFn: () => base44.entities.WalletTransaction.filter({ wallet_type: 'charity' }, '-timestamp'),
+    queryFn: () => walletTransactions.filter({ wallet_type: 'charity' }, '-timestamp'),
   });
 
   const copyAddress = () => {

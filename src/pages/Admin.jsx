@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { base44 } from '@/api/base44Client';
+import { vetApplications } from '@/lib/localStore';
 import { 
   Heart, CheckCircle, XCircle, Clock, DollarSign, 
-  ExternalLink, Eye, ChevronDown, Loader2, ArrowLeft, Wallet
+  ExternalLink, Eye, Loader2, ArrowLeft, Wallet
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import {
   Dialog,
   DialogContent,
@@ -49,13 +49,14 @@ export default function Admin() {
 
   const { data: applications = [], isLoading } = useQuery({
     queryKey: ['admin-applications'],
-    queryFn: () => base44.entities.VetAssistanceApplication.list('-created_date'),
+    queryFn: () => vetApplications.list('-created_date'),
   });
 
   const updateMutation = useMutation({
-    mutationFn: ({ id, data }) => base44.entities.VetAssistanceApplication.update(id, data),
+    mutationFn: ({ id, data }) => vetApplications.update(id, data),
     onSuccess: () => {
-      queryClient.invalidateQueries(['admin-applications']);
+      queryClient.invalidateQueries({ queryKey: ['admin-applications'] });
+      queryClient.invalidateQueries({ queryKey: ['funded-applications'] });
       setSelectedApp(null);
     }
   });

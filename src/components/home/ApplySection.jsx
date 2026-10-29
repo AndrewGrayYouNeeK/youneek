@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { base44 } from '@/api/base44Client';
-import { Heart, Upload, AlertCircle, CheckCircle, Loader2, X } from 'lucide-react';
+import { vetApplications } from '@/lib/localStore';
+import { Heart, Upload, AlertCircle, CheckCircle, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -63,7 +63,7 @@ export default function ApplySection() {
         documentation_url = await uploadToCloudinary(documentation);
       }
 
-      return base44.entities.VetAssistanceApplication.create({
+      return vetApplications.create({
         ...data,
         estimated_cost: parseFloat(data.estimated_cost) || 0,
         amount_requested: parseFloat(data.amount_requested) || 0,
@@ -88,7 +88,8 @@ export default function ApplySection() {
       });
       setPetPhoto(null);
       setDocumentation(null);
-      queryClient.invalidateQueries(['funded-applications']);
+      queryClient.invalidateQueries({ queryKey: ['funded-applications'] });
+      queryClient.invalidateQueries({ queryKey: ['admin-applications'] });
     }
   });
 
